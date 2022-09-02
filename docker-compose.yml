@@ -1,0 +1,79 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=$MONGODB_DOCKER_USERNAME
+    #   - MONGO_INITDB_ROOT_PASSWORD=$MONGODB_DOCKER_PASSWORD
+    ports:
+     - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+    volumes:
+      - my_data:/data/db
+    networks:
+      - usha
+
+  node-app-api:
+    build:
+      context: ./node-app-api
+      dockerfile: Dockerfile
+    depends_on:
+      - mongodb
+      - redis
+    volumes:
+      - /app/node_modules
+      - ./node-app-api:/app
+    ports:
+      - $NODE_APP_PORT:$NODE_APP_PORT
+    networks:
+      - usha
+
+  react-app-ui:
+    build:
+      context: ./react-app-ui
+      dockerfile: Dockerfile
+    depends_on:
+      - node-app-api
+    volumes:
+      - /app/node_modules
+      - ./react-app-ui:/app
+    ports:
+      - $REACT_APP_APOT:$REACT_APP_APOT
+    networks:
+      - usha
+
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    ports:
+      - $REDIS_PORT:$REDIS_PORT
+    volumes:
+      - redis:/data
+    networks:
+      - usha
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - $NGINX_PORT:$NGINX_PORT
+      - $NGINX_PORT_2:$NGINX_PORT_2
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    environment:
+    - NGINX_HOST=usha-digital.com
+    - NGINX_PORT=8080
+    depends_on:
+      - node-app-api
+      - react-app-ui
+    networks:
+      - usha
+
+volumes:
+  my_data:
+  redis:
+
+networks:
+  usha:

@@ -1,0 +1,61 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# dependencies
+/node-app-api/node_modules/
+/react-app-ui/node_modules/
+/node-app-api/jspm_packages/
+/react-app-ui/jspm_packages/
+/node-app-api/.idea/
+/react-app-ui/.idea/
+/node-app-api/.vscode/
+/react-app-ui/.vscode/
+/node-app-api/logs/
+/react-app-ui/logs/
+/.pnp
+.pnp.js
+
+
+# testing
+/coverage
+
+# production
+/react-app-ui/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+package-lock.json
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# dotenv environment variables file
+.env
+.env.test
+
+/node-app-api/.env
+/node-app-api/.env.test
+
+/react-app-ui/.env
+/react-app-ui/.env.test
+
+/node-app-api/.git
+/react-app-ui/.git
+
+
+

@@ -1,0 +1,6 @@
+[submodule "node-app-api"]
+	path = node-app-api
+	url = https://github.com/beraujjwal/mnodejs.git
+[submodule "react-app-ui"]
+	path = react-app-ui
+	url = https://github.com/beraujjwal/react-sneat.git
