@@ -16,6 +16,7 @@ services:
 
   node-app-api:
     container_name: node-app
+    image: node-app
     build:
       context: ./node-app-api
       dockerfile: Dockerfile
@@ -32,6 +33,7 @@ services:
 
   react-app-ui:
     container_name: react-app
+    image: react-app
     build:
       context: ./react-app-ui
       dockerfile: Dockerfile
